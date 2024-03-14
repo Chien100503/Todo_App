@@ -74,27 +74,38 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xffCCD3CA),
-      appBar: AppBar(
+    return SafeArea(
+      child: Scaffold(
         backgroundColor: Color(0xffF5E8DD),
-        title: Center(child: Text('TODO APP', style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),)),
-        elevation: 0,
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: createNewTask,
-        child: Icon(Icons.add),
-      ),
-      body: ListView.builder(
-        itemCount: db.toDoList.length,
-        itemBuilder: (context, index) {
-          return ToDoTile(
-            taskName: db.toDoList[index][0],
-            taskCompleted: db.toDoList[index][1],
-            onChanged: (value) => checkBoxChanged(value, index),
-            deleteFunction: (context) => deleteTask(index),
-          );
-        },
+        appBar: AppBar(
+          backgroundColor: Color(0xffB5C0D0),
+          title: Center(child: Text('TODO APP', style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),)),
+          elevation: 0,
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: createNewTask,
+          child: Container(
+            height: 100,
+            width: 100,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Color(0xffB5C0D0),
+            ),
+            child: Icon(Icons.add),
+          ),
+        ),
+        body: ListView.builder(
+          itemCount: db.toDoList.length,
+          itemBuilder: (context, index) {
+            return ToDoTile(
+                taskName: db.toDoList[index][0],
+                taskCompleted: db.toDoList[index][1],
+                onChanged: (value) => checkBoxChanged(value, index),
+                deleteFunction: (context) => deleteTask(index),
+      
+            );
+          },
+        ),
       ),
     );
   }
